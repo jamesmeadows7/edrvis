@@ -1,4 +1,4 @@
-"""Command-line entry point for `edrvis`."""
+"""Command-line entry point for ``edrvis``."""
 
 import argparse
 from pathlib import Path
@@ -6,21 +6,19 @@ from pathlib import Path
 from edrvis.reader import read_edr
 
 
-def main():
-    """Entry point for the `edrvis` command."""
-    # parse arguments
+def main() -> None:
+    """Parse arguments, load EDR data, and launch the TUI."""
     parser = argparse.ArgumentParser(
-        prog="edrvis", description="Visualise GROMACS edr files in the terminal."
+        prog="edrvis",
+        description="Visualise GROMACS EDR files in the terminal.",
     )
     parser.add_argument("edr_path", type=Path, help="edr file path")
     args = parser.parse_args()
 
-    # read edr file
-    edr_path = args.edr_path
+    edr_path: Path = args.edr_path
     edr_data, edr_units = read_edr(edr_path)
 
-    # build app
-    from edrvis.app import BasicApp
+    from edrvis.app import EdrvisApp
 
-    app = BasicApp(edr_path, edr_data, edr_units)
+    app = EdrvisApp(edr_path, edr_data, edr_units)
     app.run()
