@@ -8,17 +8,19 @@ from edrvis.reader import read_edr
 
 def main():
     """Entry point for the `edrvis` command."""
+    # parse arguments
     parser = argparse.ArgumentParser(
         prog="edrvis", description="Visualise GROMACS edr files in the terminal."
     )
-    parser.add_argument("edr_file", type=Path, help="edr file path")
+    parser.add_argument("edr_path", type=Path, help="edr file path")
     args = parser.parse_args()
 
-    edr_path: Path = args.edr_file
+    # read edr file
+    edr_path = args.edr_path
+    edr_data, edr_units = read_edr(edr_path)
 
-    # read_edr(edr_path)
-
+    # build app
     from edrvis.app import BasicApp
 
-    app = BasicApp()
+    app = BasicApp(edr_path, edr_data, edr_units)
     app.run()
