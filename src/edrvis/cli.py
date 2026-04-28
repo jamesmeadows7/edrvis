@@ -16,9 +16,9 @@ def main():
 
     edr_path: Path = args.edr_file
 
-    read_edr(edr_path)
+    # read_edr(edr_path)
 
-    # from edrvis.app import BasicApp
+    from edrvis.app import BasicApp
 
-    # app = BasicApp()
-    # app.run()
+    app = BasicApp()
+    app.run()

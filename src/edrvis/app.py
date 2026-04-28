@@ -1,95 +1,22 @@
-from time import monotonic
-
 from textual.app import App, ComposeResult
-from textual.containers import HorizontalGroup, VerticalScroll
-from textual.reactive import reactive
-from textual.widgets import Button, Digits, Footer, Header
-
-
-class TimeDisplay(Digits):
-    """A widget to display the elapsed time."""
-
-    start_time = reactive(monotonic)
-    time: reactive[float] = reactive(0.0)
-    total: reactive[float] = reactive(0.0)
-
-    def on_mount(self) -> None:
-        """Event handler when widget is added to the app."""
-        self.update_timer = self.set_interval(1 / 60, self.update_time, pause=True)
-
-    def update_time(self) -> None:
-        self.time = self.total + (monotonic() - self.start_time)
-
-    def watch_time(self, time: float) -> None:
-        minutes, seconds = divmod(time, 60)
-        hours, minutes = divmod(minutes, 60)
-        self.update(f"{hours:02,.0f}:{minutes:02.0f}:{seconds:05.2f}")
-
-    def start(self) -> None:
-        self.start_time = monotonic()
-        self.update_timer.resume()
-
-    def stop(self) -> None:
-        self.update_timer.pause()
-        self.total += monotonic() - self.start_time
-        self.time = self.total
-
-    def reset(self) -> None:
-        self.total = 0.0
-        self.time = 0.0
-
-
-class Stopwatch(HorizontalGroup):
-    """A stopwatch widget."""
-
-    def on_button_pressed(self, event: Button.Pressed) -> None:
-        button_id = event.button.id
-        time_display = self.query_one(TimeDisplay)
-        if button_id == "start":
-            time_display.start()
-            self.add_class("started")
-        elif button_id == "stop":
-            time_display.stop()
-            self.remove_class("started")
-        elif button_id == "reset":
-            time_display.reset()
-
-    def compose(self) -> ComposeResult:
-        yield Button("Start", id="start", variant="success")
-        yield Button("Stop", id="stop", variant="error")
-        yield Button("Reset", id="reset")
-        yield TimeDisplay()
+from textual.widgets import Footer, Header
+from textual_plot import PlotWidget
 
 
 class BasicApp(App):
     """A basic app to learn how to use Textual."""
 
-    TITLE = "stopwatch"
-    SUB_TITLE = "simple stopwatch tui"
-    CSS_PATH = "stopwatch.tcss"
+    TITLE = "edrvis"
+    SUB_TITLE = "visualise gromacs edr files"
     BINDINGS = [
-        ("q", "quit", "Quit the app"),
-        ("d", "toggle_dark", "Toggle dark mode"),
-        ("a", "add_stopwatch", "Add"),
-        ("r", "remove_stopwatch", "Remove"),
+        ("q", "quit", "Quit"),
     ]
 
     def compose(self) -> ComposeResult:
         yield Header()
         yield Footer()
-        yield VerticalScroll(Stopwatch(), Stopwatch(), Stopwatch(), id="timers")
+        yield PlotWidget()
 
-    def action_add_stopwatch(self) -> None:
-        new_stopwatch = Stopwatch()
-        self.query_one("#timers").mount(new_stopwatch)
-        new_stopwatch.scroll_visible()
-
-    def action_remove_stopwatch(self) -> None:
-        timers = self.query("Stopwatch")
-        if timers:
-            timers.last().remove()
-
-    def action_toggle_dark(self) -> None:
-        self.theme = (
-            "textual-dark" if self.theme == "textual-light" else "textual-light"
-        )
+    def on_mount(self) -> None:
+        plot = self.query_one(PlotWidget)
+        plot.plot(x=[0, 1, 2, 3, 4], y=[0, 1, 4, 9, 16])
