@@ -6,6 +6,7 @@ readme = "README.md"
 authors = [
     { name = "jamesmeadows7", email = "james.w.meadows@durham.ac.uk" }
 ]
+keywords = ["gromacs", "molecular-dynamics", "tui", "visualisation"]
 requires-python = ">=3.11"
 dependencies = [
     "plotext>=5.3.2",
