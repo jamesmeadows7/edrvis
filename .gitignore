@@ -8,3 +8,13 @@ wheels/
 
 # Virtual environments
 .venv
+
+# Editor
+.vscode
+
+# Tools
+.ruff_cache/
+.ty_cache/
+
+# OS
+.DS_Store
