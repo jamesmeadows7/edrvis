@@ -9,6 +9,7 @@ authors = [
 keywords = ["gromacs", "molecular-dynamics", "tui", "visualisation"]
 requires-python = ">=3.11"
 dependencies = [
+    "numpy>=2.4.4",
     "plotext>=5.3.2",
     "pyedr>=0.8.0",
     "textual>=8.2.4",

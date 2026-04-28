@@ -16,6 +16,7 @@ name = "edrvis"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
+    { name = "numpy" },
     { name = "plotext" },
     { name = "pyedr" },
     { name = "textual" },
@@ -30,6 +31,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
+    { name = "numpy", specifier = ">=2.4.4" },
     { name = "plotext", specifier = ">=5.3.2" },
     { name = "pyedr", specifier = ">=0.8.0" },
     { name = "textual", specifier = ">=8.2.4" },
