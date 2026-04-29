@@ -16,7 +16,7 @@ def main() -> None:
     parser.add_argument(
         "--theme",
         choices=["dark", "light"],
-        default="dark",
+        default="light",
         help="colour theme (default: dark)",
     )
     args = parser.parse_args()

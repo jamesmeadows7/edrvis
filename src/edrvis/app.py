@@ -27,7 +27,7 @@ class EdrvisApp(App):
         edr_path: Path,
         edr_data: dict[str, ndarray],
         edr_units: dict[str, str],
-        theme: str = "dark",
+        theme: str,
     ) -> None:
         """Initialise app with pre-loaded EDR data."""
         super().__init__()
