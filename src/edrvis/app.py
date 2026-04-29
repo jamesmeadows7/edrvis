@@ -19,6 +19,7 @@ class EdrvisApp(App):
         ("j", "next_quantity", "Next"),
         ("k", "prev_quantity", "Previous"),
     ]
+    CSS_PATH = "app.tcss"
 
     def __init__(
         self,

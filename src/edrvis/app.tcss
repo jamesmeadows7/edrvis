@@ -1,0 +1,12 @@
+Screen {
+    layout: horizontal;
+}
+
+Sidebar {
+    width: 30;
+    border-right: solid $primary;
+}
+
+EdrPlotWidget {
+    width: 1fr;
+}
