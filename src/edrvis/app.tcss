@@ -4,7 +4,8 @@ Screen {
 
 Sidebar {
     width: 30;
-    border-right: solid $primary;
+    border: solid $primary;
+    border-title-align: center;
 }
 
 EdrPlotWidget {

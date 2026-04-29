@@ -46,6 +46,7 @@ class EdrvisApp(App):
         quantities = [k for k in self._data if k != "Time"]
         sidebar = self.query_one(Sidebar)
         sidebar.populate(quantities)
+        self.query_one(Sidebar).border_title = "Quantity"
         self.query_one(EdrPlotWidget).show(self._data, self._units, quantities[0])
 
     def on_quantity_changed(self, message: QuantityChanged) -> None:

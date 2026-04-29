@@ -9,6 +9,8 @@ from textual_plot import HiResMode, PlotWidget
 class EdrPlotWidget(Widget):
     """Displays a single EDR quantity vs time."""
 
+    can_focus = False
+
     def compose(self) -> ComposeResult:
         """Compose the plot widget."""
         yield PlotWidget()

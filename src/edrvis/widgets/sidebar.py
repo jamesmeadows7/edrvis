@@ -15,10 +15,17 @@ class QuantityChanged(Message):
 class Sidebar(ListView):
     """Scrollable list of EDR quantity names."""
 
+    can_focus = False
+
     def populate(self, quantities: list[str]) -> None:
         """Populate the list with quantity names."""
         for quantity in quantities:
             self.append(ListItem(Label(quantity)))
+
+    def on_list_view_selected(self, event: ListView.Selected) -> None:
+        """Handle mouse clicks."""
+        self.index = self.children.index(event.item)
+        self._post_quantity_changed()
 
     def select_next(self) -> None:
         """Move selection down one item."""
