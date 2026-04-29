@@ -7,7 +7,7 @@ authors = [
     { name = "jamesmeadows7", email = "james.w.meadows@durham.ac.uk" }
 ]
 keywords = ["gromacs", "molecular-dynamics", "tui", "visualisation"]
-requires-python = ">=3.11"
+requires-python = ">=3.12"
 dependencies = [
     "numpy>=2.4.4",
     "pyedr>=0.8.0",
@@ -31,7 +31,7 @@ dev = [
 
 [tool.ruff]
 line-length = 88
-target-version = "py311"
+target-version = "py312"
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B", "SIM"]
