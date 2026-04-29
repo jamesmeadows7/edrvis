@@ -3,6 +3,7 @@
 import argparse
 from pathlib import Path
 
+from edrvis import __version__
 from edrvis.reader import read_edr
 
 
@@ -18,6 +19,11 @@ def main() -> None:
         choices=["dark", "light"],
         default="light",
         help="colour theme (default: dark)",
+    )
+    parser.add_argument(
+        "--version",
+        action="version",
+        version=f"%(prog)s {__version__}",
     )
     args = parser.parse_args()
 
