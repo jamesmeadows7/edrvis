@@ -28,5 +28,5 @@ class EdrPlotWidget(Widget):
         plot = self.query_one(PlotWidget)
         plot.clear()
         plot.plot(x=data["Time"], y=data[quantity], hires_mode=HiResMode.BRAILLE)
-        plot.set_xlabel(f"Time [{units['Time']}]")
-        plot.set_ylabel(f"{quantity} [{units[quantity]}]")
+        plot.set_xlabel(f"Time ({units['Time']})")
+        plot.set_ylabel(f"{quantity} ({units[quantity]})")
