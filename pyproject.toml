@@ -8,12 +8,27 @@ authors = [
 ]
 keywords = ["gromacs", "molecular-dynamics", "tui", "visualisation"]
 requires-python = ">=3.12"
+license = { file = "LICENSE" }
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Chemistry",
+    "Topic :: Scientific/Engineering :: Physics",
+]
 dependencies = [
     "numpy>=2.4.4",
     "pyedr>=0.8.0",
     "textual>=8.2.4",
     "textual-plotext>=1.0.1",
 ]
+
+[project.urls]
+Repository = "https://github.com/jamesmeadows7/edrvis"
 
 [project.scripts]
 edrvis = "edrvis.cli:main"
