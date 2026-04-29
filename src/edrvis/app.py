@@ -18,6 +18,7 @@ class EdrvisApp(App):
         ("q", "quit", "Quit"),
         ("j", "next_quantity", "Next"),
         ("k", "prev_quantity", "Previous"),
+        ("d", "toggle_dark", "Toggle dark mode"),
     ]
     CSS_PATH = "app.tcss"
 
@@ -26,12 +27,14 @@ class EdrvisApp(App):
         edr_path: Path,
         edr_data: dict[str, ndarray],
         edr_units: dict[str, str],
+        theme: str = "dark",
     ) -> None:
         """Initialise app with pre-loaded EDR data."""
         super().__init__()
         self._edr_path = edr_path
         self._data = edr_data
         self._units = edr_units
+        self._theme = theme
 
     def compose(self) -> ComposeResult:
         """Compose the widget layout."""
@@ -43,6 +46,7 @@ class EdrvisApp(App):
     def on_mount(self) -> None:
         """Populate the sidebar and plot the first quantity."""
         self.sub_title = self._edr_path.name
+        self.theme = f"atom-one-{self._theme}"
         quantities = [k for k in self._data if k != "Time"]
         sidebar = self.query_one(Sidebar)
         sidebar.populate(quantities)
@@ -60,3 +64,8 @@ class EdrvisApp(App):
     def action_prev_quantity(self) -> None:
         """Move sidebar selection up."""
         self.query_one(Sidebar).select_prev()
+
+    def action_toggle_dark(self) -> None:
+        """Toggle between light and dark mode."""
+        self._theme = "light" if self._theme == "dark" else "dark"
+        self.theme = f"atom-one-{self._theme}"

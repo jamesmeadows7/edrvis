@@ -13,6 +13,12 @@ def main() -> None:
         description="Visualise GROMACS EDR files in the terminal.",
     )
     parser.add_argument("edr_path", type=Path, help="edr file path")
+    parser.add_argument(
+        "--theme",
+        choices=["dark", "light"],
+        default="dark",
+        help="colour theme (default: dark)",
+    )
     args = parser.parse_args()
 
     edr_path: Path = args.edr_path
@@ -20,5 +26,5 @@ def main() -> None:
 
     from edrvis.app import EdrvisApp
 
-    app = EdrvisApp(edr_path, edr_data, edr_units)
+    app = EdrvisApp(edr_path, edr_data, edr_units, theme=args.theme)
     app.run()
