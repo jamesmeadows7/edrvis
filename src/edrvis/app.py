@@ -36,10 +36,12 @@ class EdrvisApp(App):
         """Populate plot once app is mounted."""
         self.sub_title = self._edr_path.name
         plot = self.query_one(PlotWidget)
+        x_name = "Time"
+        y_name = "Angle"
         plot.plot(
-            x=self._data["Time"],
-            y=self._data["Bond"],
+            x=self._data[x_name],
+            y=self._data[y_name],
             hires_mode=HiResMode.BRAILLE,
         )
-        plot.set_xlabel("Time")
-        plot.set_ylabel("Temp.")
+        plot.set_xlabel(f"{x_name} ({self._units[x_name]})")
+        plot.set_ylabel(f"{y_name} ({self._units[y_name]})")
