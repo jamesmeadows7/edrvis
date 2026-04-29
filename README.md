@@ -8,6 +8,19 @@ Made using [pyedr](https://github.com/MDAnalysis/panedr) and [textual](https://g
   <img width="49%" src="https://github.com/user-attachments/assets/10b39de3-8178-44bc-91e5-072860314057" alt="edrvis-dark" />
 </div>
 
+
+## Installation
+
+As a standalone tool:
+```bash
+uv tool install edrvis
+```
+
+In a project environment:
+```bash
+uv add edrvis
+```
+
 ## Usage
 ```bash
 edrvis path/to/file.edr
