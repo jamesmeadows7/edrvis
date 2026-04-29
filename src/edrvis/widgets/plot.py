@@ -3,7 +3,7 @@
 from numpy import ndarray
 from textual.app import ComposeResult
 from textual.widget import Widget
-from textual_plot import HiResMode, PlotWidget
+from textual_plotext import PlotextPlot
 
 
 class EdrPlotWidget(Widget):
@@ -13,7 +13,7 @@ class EdrPlotWidget(Widget):
 
     def compose(self) -> ComposeResult:
         """Compose the plot widget."""
-        yield PlotWidget()
+        yield PlotextPlot()
 
     def show(
         self, data: dict[str, ndarray], units: dict[str, str], quantity: str
@@ -25,8 +25,11 @@ class EdrPlotWidget(Widget):
             units: Units for each quantity keyed by name.
             quantity: The quantity to plot on the y-axis.
         """
-        plot = self.query_one(PlotWidget)
-        plot.clear()
-        plot.plot(x=data["Time"], y=data[quantity], hires_mode=HiResMode.BRAILLE)
-        plot.set_xlabel(f"Time ({units['Time']})")
-        plot.set_ylabel(f"{quantity} ({units[quantity]})")
+        plot_widget = self.query_one(PlotextPlot)
+        plt = plot_widget.plt
+        plt.clear_figure()
+        plt.plot(list(data["Time"]), list(data[quantity]), marker="braille")
+        plt.xlabel(f"Time ({units['Time']})")
+        unit = "no units" if units[quantity] == "" else units[quantity]
+        plt.ylabel(f"units: {unit}")
+        plot_widget.refresh()

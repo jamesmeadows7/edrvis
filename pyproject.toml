@@ -12,7 +12,7 @@ dependencies = [
     "numpy>=2.4.4",
     "pyedr>=0.8.0",
     "textual>=8.2.4",
-    "textual-plot>=0.10.1",
+    "textual-plotext>=1.0.1",
 ]
 
 [project.scripts]
