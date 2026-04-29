@@ -5,14 +5,20 @@ from pathlib import Path
 from numpy import ndarray
 from textual.app import App, ComposeResult
 from textual.widgets import Footer, Header
-from textual_plot import HiResMode, PlotWidget
+
+from edrvis.widgets.plot import EdrPlotWidget
+from edrvis.widgets.sidebar import QuantityChanged, Sidebar
 
 
 class EdrvisApp(App):
     """Textual application for visualising GROMACS EDR files."""
 
     TITLE = "edrvis"
-    BINDINGS = [("q", "quit", "Quit")]
+    BINDINGS = [
+        ("q", "quit", "Quit"),
+        ("j", "next_quantity", "Next"),
+        ("k", "prev_quantity", "Previous"),
+    ]
 
     def __init__(
         self,
@@ -29,19 +35,26 @@ class EdrvisApp(App):
     def compose(self) -> ComposeResult:
         """Compose the widget layout."""
         yield Header()
+        yield Sidebar()
+        yield EdrPlotWidget()
         yield Footer()
-        yield PlotWidget()
 
     def on_mount(self) -> None:
-        """Populate plot once app is mounted."""
+        """Populate the sidebar and plot the first quantity."""
         self.sub_title = self._edr_path.name
-        plot = self.query_one(PlotWidget)
-        x_name = "Time"
-        y_name = "Angle"
-        plot.plot(
-            x=self._data[x_name],
-            y=self._data[y_name],
-            hires_mode=HiResMode.BRAILLE,
-        )
-        plot.set_xlabel(f"{x_name} ({self._units[x_name]})")
-        plot.set_ylabel(f"{y_name} ({self._units[y_name]})")
+        quantities = [k for k in self._data if k != "Time"]
+        sidebar = self.query_one(Sidebar)
+        sidebar.populate(quantities)
+        self.query_one(EdrPlotWidget).show(self._data, self._units, quantities[0])
+
+    def on_quantity_changed(self, message: QuantityChanged) -> None:
+        """Replot when selected quantity changes."""
+        self.query_one(EdrPlotWidget).show(self._data, self._units, message.quantity)
+
+    def action_next_quantity(self) -> None:
+        """Move sidebar selection down."""
+        self.query_one(Sidebar).select_next()
+
+    def action_prev_quantity(self) -> None:
+        """Move sidebar selection up."""
+        self.query_one(Sidebar).select_prev()
