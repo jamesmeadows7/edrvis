@@ -1,6 +1,6 @@
 [project]
 name = "edrvis"
-version = "0.1.0"
+version = "0.2.0"
 description = "Visualise GROMACS edr files in the terminal."
 readme = "README.md"
 authors = [

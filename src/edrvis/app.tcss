@@ -2,8 +2,19 @@ Screen {
     layout: horizontal;
 }
 
-Sidebar {
+#left-panel {
     width: 30;
+    layout: vertical;
+}
+
+Sidebar {
+    height: 1fr;
+    border: solid $primary;
+    border-title-align: center;
+}
+
+StatsPanel {
+    height: auto;
     border: solid $primary;
     border-title-align: center;
 }

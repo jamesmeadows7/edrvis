@@ -4,10 +4,12 @@ from pathlib import Path
 
 from numpy import ndarray
 from textual.app import App, ComposeResult
+from textual.containers import Vertical
 from textual.widgets import Footer, Header
 
 from edrvis.widgets.plot import EdrPlotWidget
 from edrvis.widgets.sidebar import QuantityChanged, Sidebar
+from edrvis.widgets.stats import StatsPanel
 
 
 class EdrvisApp(App):
@@ -39,7 +41,9 @@ class EdrvisApp(App):
     def compose(self) -> ComposeResult:
         """Compose the widget layout."""
         yield Header()
-        yield Sidebar()
+        with Vertical(id="left-panel"):
+            yield Sidebar(id="sidebar")
+            yield StatsPanel(id="stats")
         yield EdrPlotWidget()
         yield Footer()
 
@@ -53,10 +57,13 @@ class EdrvisApp(App):
         sidebar.index = 0
         self.query_one(Sidebar).border_title = "Quantity"
         self.query_one(EdrPlotWidget).show(self._data, self._units, quantities[0])
+        self.query_one(StatsPanel).border_title = "Statistics"
+        self.query_one(StatsPanel).update(self._data, quantities[0])
 
     def on_quantity_changed(self, message: QuantityChanged) -> None:
-        """Replot when selected quantity changes."""
+        """Replot and update stats when selected quantity changes."""
         self.query_one(EdrPlotWidget).show(self._data, self._units, message.quantity)
+        self.query_one(StatsPanel).update(self._data, message.quantity)
 
     def action_next_quantity(self) -> None:
         """Move sidebar selection down."""
