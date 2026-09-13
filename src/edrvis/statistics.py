@@ -32,7 +32,7 @@ def total_drift(values: ndarray, time: ndarray) -> float:
     return float((slope * time[-1] + intercept) - (slope * time[0] + intercept))
 
 
-def summarise(values: ndarray, time: ndarray, n_blocks: int = 5) -> SummaryStats:
+def summarise(values: ndarray, time: ndarray, n_blocks: int) -> SummaryStats:
     """Compute mean, std, error estimate, total drift, min and max for `values`."""
     return SummaryStats(
         mean=np.mean(values),

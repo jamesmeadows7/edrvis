@@ -21,6 +21,12 @@ def main() -> None:
         help="colour theme (default: dark)",
     )
     parser.add_argument(
+        "--n-blocks",
+        type=int,
+        default=5,
+        help="number of blocks for the error estimate (default: 5)",
+    )
+    parser.add_argument(
         "--version",
         action="version",
         version=f"%(prog)s {__version__}",
@@ -32,5 +38,7 @@ def main() -> None:
 
     from edrvis.app import EdrvisApp
 
-    app = EdrvisApp(edr_path, edr_data, edr_units, theme=args.theme)
+    app = EdrvisApp(
+        edr_path, edr_data, edr_units, theme=args.theme, n_blocks=args.n_blocks
+    )
     app.run()

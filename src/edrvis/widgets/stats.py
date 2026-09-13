@@ -28,9 +28,9 @@ class StatsPanel(Widget):
         yield Label(id="min")
         yield Label(id="max")
 
-    def update(self, data: dict[str, ndarray], quantity: str) -> None:
+    def update(self, data: dict[str, ndarray], quantity: str, n_blocks: int) -> None:
         """Recompute statistics for the new quantity."""
-        stats = summarise(data[quantity], data["Time"])
+        stats = summarise(data[quantity], data["Time"], n_blocks)
         self.query_one("#mean", Label).update(f"Mean: {stats.mean:.5g}")
         self.query_one("#std", Label).update(f"Std: {stats.std:.5g}")
         self.query_one("#err_est", Label).update(f"Err. Est.: {stats.err_est:.5g}")

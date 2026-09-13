@@ -30,6 +30,7 @@ class EdrvisApp(App):
         edr_data: dict[str, ndarray],
         edr_units: dict[str, str],
         theme: str,
+        n_blocks: int,
     ) -> None:
         """Initialise app with pre-loaded EDR data."""
         super().__init__()
@@ -37,6 +38,7 @@ class EdrvisApp(App):
         self._data = edr_data
         self._units = edr_units
         self._theme = theme
+        self._n_blocks = n_blocks
 
     def compose(self) -> ComposeResult:
         """Compose the widget layout."""
@@ -58,12 +60,12 @@ class EdrvisApp(App):
         self.query_one(Sidebar).border_title = "Quantity"
         self.query_one(EdrPlotWidget).show(self._data, self._units, quantities[0])
         self.query_one(StatsPanel).border_title = "Statistics"
-        self.query_one(StatsPanel).update(self._data, quantities[0])
+        self.query_one(StatsPanel).update(self._data, quantities[0], self._n_blocks)
 
     def on_quantity_changed(self, message: QuantityChanged) -> None:
         """Replot and update stats when selected quantity changes."""
         self.query_one(EdrPlotWidget).show(self._data, self._units, message.quantity)
-        self.query_one(StatsPanel).update(self._data, message.quantity)
+        self.query_one(StatsPanel).update(self._data, message.quantity, self._n_blocks)
 
     def action_next_quantity(self) -> None:
         """Move sidebar selection down."""
