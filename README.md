@@ -1,5 +1,9 @@
 # edrvis
 
+[![PyPI version](https://img.shields.io/pypi/v/edrvis)](https://pypi.org/project/edrvis/)
+[![Python versions](https://img.shields.io/pypi/pyversions/edrvis)](https://pypi.org/project/edrvis/)
+[![License](https://img.shields.io/pypi/l/edrvis)](https://github.com/jamesmeadows7/edrvis/blob/main/LICENSE)
+
 A terminal user interface for visualising [GROMACS](https://www.gromacs.org/) edr files.
 Made using [pyedr](https://github.com/MDAnalysis/panedr) and [textual](https://github.com/Textualize/textual).
 
