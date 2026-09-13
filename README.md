@@ -47,5 +47,5 @@ uv run edrvis path/to/file.edr
 
 ## Roadmap
 
-- [ ] Add tests
+- [x] Add tests
 - [x] Compute block average, error, RMSD and total drift

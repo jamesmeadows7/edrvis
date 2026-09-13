@@ -1,6 +1,6 @@
 [project]
 name = "edrvis"
-version = "0.2.0"
+version = "0.3.0"
 description = "Visualise GROMACS edr files in the terminal."
 readme = "README.md"
 authors = [
@@ -8,12 +8,12 @@ authors = [
 ]
 keywords = ["gromacs", "molecular-dynamics", "tui", "visualisation"]
 requires-python = ">=3.12"
-license = { file = "LICENSE" }
+license = "MIT"
+license-files = ["LICENSE"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Environment :: Console",
     "Intended Audience :: Science/Research",
-    "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
@@ -34,7 +34,7 @@ Repository = "https://github.com/jamesmeadows7/edrvis"
 edrvis = "edrvis.cli:main"
 
 [build-system]
-requires = ["uv_build>=0.9.18,<0.10.0"]
+requires = ["uv_build>=0.11.24,<0.12.0"]
 build-backend = "uv_build"
 
 [dependency-groups]
