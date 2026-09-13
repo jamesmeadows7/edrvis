@@ -7,6 +7,14 @@ from edrvis import __version__
 from edrvis.reader import read_edr
 
 
+def positive_int(value: str) -> int:
+    """Parse an int and reject zero/negative values."""
+    n = int(value)
+    if n < 1:
+        raise argparse.ArgumentTypeError(f"must be a positive integer, got {value!r}")
+    return n
+
+
 def main() -> None:
     """Parse arguments, load EDR data, and launch the TUI."""
     parser = argparse.ArgumentParser(
@@ -22,7 +30,7 @@ def main() -> None:
     )
     parser.add_argument(
         "--n-blocks",
-        type=int,
+        type=positive_int,
         default=5,
         help="number of blocks for the error estimate (default: 5)",
     )
