@@ -15,8 +15,8 @@ def positive_int(value: str) -> int:
     return n
 
 
-def main() -> None:
-    """Parse arguments, load EDR data, and launch the TUI."""
+def build_parser() -> argparse.ArgumentParser:
+    """Build the ``edrvis`` command-line argument parser."""
     parser = argparse.ArgumentParser(
         prog="edrvis",
         description="Visualise GROMACS EDR files in the terminal.",
@@ -39,7 +39,12 @@ def main() -> None:
         action="version",
         version=f"%(prog)s {__version__}",
     )
-    args = parser.parse_args()
+    return parser
+
+
+def main() -> None:
+    """Parse arguments, load EDR data, and launch the TUI."""
+    args = build_parser().parse_args()
 
     edr_path: Path = args.edr_path
     edr_data, edr_units = read_edr(edr_path)
