@@ -7,10 +7,9 @@
 A terminal user interface for visualising [GROMACS](https://www.gromacs.org/) edr files.
 Made using [pyedr](https://github.com/MDAnalysis/panedr) and [textual](https://github.com/Textualize/textual).
 
-<div style="display: flex; gap: 10px;">
-  <img width="49%" src="https://github.com/user-attachments/assets/7e08d169-257f-4243-9ffe-9e2e472984c6" alt="edrvis-light" />
-  <img width="49%" src="https://github.com/user-attachments/assets/10b39de3-8178-44bc-91e5-072860314057" alt="edrvis-dark" />
-</div>
+<img width="1211" height="830" alt="image" src="https://github.com/user-attachments/assets/888b5697-5de5-4bb1-afd1-fa1e0fb95bd7" />
+<img width="1211" height="830" alt="image" src="https://github.com/user-attachments/assets/74c77c5b-5d2d-4f3f-885e-ee977fafdff0" />
+
 
 
 ## Installation
